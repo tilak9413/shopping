@@ -12,7 +12,7 @@
         private Long id;
 
         @Column(nullable = false)
-            private String productName;
+        private String productName;
 
         @Column(nullable = false)
         private String unitPrice;
@@ -32,6 +32,6 @@
         @Column(nullable = false)
         private String dateTime;
 
-        @Column(nullable = false)
-        private String desc;
+        @Column(nullable = false, name = "description")
+        private String description;
     }

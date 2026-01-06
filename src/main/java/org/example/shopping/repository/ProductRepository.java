@@ -4,5 +4,5 @@ import org.example.shopping.model.AddProductMdl;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository extends JpaRepository<AddProductMdl, Long> {
-    // No code needed here! .save() is built-in.
+    org.springframework.data.domain.Page<AddProductMdl> findByProductNameContainingIgnoreCase(String productName, org.springframework.data.domain.Pageable pageable);
 }

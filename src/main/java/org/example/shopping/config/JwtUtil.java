@@ -10,7 +10,9 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 @Component
 public class JwtUtil {
-    private final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    // Use a fixed key so tokens persist across server restarts.
+    // Ensure this key is at least 32 characters long
+    private final SecretKey SECRET_KEY = Keys.hmacShaKeyFor("MySuperSecretKeyForJwtSigning1234567890".getBytes()); // 32+ characters
     private final long EXPIRATION_TIME = 86400000;
 
     public String generateToken(String username) {
@@ -26,6 +28,7 @@ public class JwtUtil {
             Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
